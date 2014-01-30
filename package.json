@@ -2,18 +2,18 @@
   "name": "com-fs",
   "version": "0.1.5",
   "author": {
-    "name": "vadim b.",
+    "name": "vadim baklanov",
     "email": "antheworld@gmail.com"
   },
-  "homepage": "https://github.com/nodejs-components/com-fs",
+  "homepage": "https://github.com/node-components/com-fs",
   "description": "file system components",
   "repository": {
     "type": "git",
-    "url": "https://github.com/nodejs-components/com-fs.git"
+    "url": "https://github.com/node-components/com-fs.git"
   },
   "main": "com-fs.js",
   "bugs": {
-    "url": "http://github.com/nodejs-components/com-fs/issues"
+    "url": "http://github.com/node-components/com-fs/issues"
   },
   "files": ["com-fs.js","LICENSE","README.md"],
   "license": "MIT"

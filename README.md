@@ -5,7 +5,7 @@ com-fs
 
 [![NPM version](https://badge.fury.io/js/com-fs.png)](http://badge.fury.io/js/com-fs)
 
-[GitHub repository](https://github.com/nodejs-components/com-fs)
+[GitHub repository](https://github.com/node-components/com-fs)
 
 ### Installing
 

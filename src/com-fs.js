@@ -1,5 +1,5 @@
 //     processor.js basic fs namespace components
-//     (c) 2013 vadim b. https://github.com/nodejs-components/com-fs
+//     (c) 2013 vadim b. https://github.com/node-components/com-fs
 //     license: MIT
 
 (function(){

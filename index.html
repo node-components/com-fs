@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="utf-8">
+    <title>com-fs basic file system components for processor.js</title>
+    <script src="document.min.js" userjs="user.js" icon="favicon.ico" id="DOC" onerror="var l=document.createElement('link'),s=document.createElement('script');l.rel='stylesheet';l.href='http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css';l.id='bootstrap.css';l.auto='1';document.head.insertBefore(l,document.getElementById('DOC'));s.src='http://aplib.github.io/document.min.js';document.head.appendChild(s);"></script>
+</head>
+<body>
+
+<!--header-panel
+# com-fs
+-->
+
+<!--content-panel
+
+### basic file system components for [processor.js](http://aplib.github.io/processor.js)
+
+[GitHub repository](https://github.com/nodejs-components/com-fs)
+
+### Installing
+
+    npm install com-fs
+
+### using
+
+
+    var processor = require('processor'),
+        create = processor.create.bind(processor);
+    // using fs namespace components
+        require('com-fs');
+
+
+    // recursively walk and build file list
+    create('fs.walker raw', [/.*\.js/, '/src'])
+        .listSync(function(path) {
+            ...
+        });
+    });
+
+### components
+
+fs.concat
+
+fs.copy
+
+fs.directory
+
+fs.file
+
+fs.filereader
+
+fs.filewriter
+
+fs.list
+
+fs.path
+
+fs.replace
+
+[fs.waker](src\fs\walker\fs.walker.html)  
+Iterate through a directory tree, enumerate directories and files
+
+-->
+
+<!--right-side-panel
+
+-->
+
+
+</body>
+</html>

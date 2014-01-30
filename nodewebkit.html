@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="utf-8">
+    <title>Simple Markdown site template</title>
+    <script src="document.js" userjs="user.js" icon="favicon.ico" id="DOC"></script>
+</head>
+<body>
+
+<!--header-panel
+# Markdown консоль
+## Для приложений на node-webkit
+-->
+
+<!--content-panel
+[ok_button:bootstrap.button]Ok[/bootstrap.button]
+-->
+
+<script>
+(typeof $ENV !== 'undefined') ? initialize() : (window.defercqueue || (window.defercqueue = [])).push(initialize);
+function initialize() {
+$DOC.onload(function() {
+
+var processor = require('processor.js'),
+    root = processor.root,
+    create = processor.create.bind(processor),
+    ccreate = controls.create.bind(controls);
+// using
+    require('com-fs.js');
+
+
+var content_panel = $DOC.sections['content-panel'],
+    ok = content_panel.ok_button;
+
+// событие нажатия кнопки
+ok.on('click', function() {
+
+    // текущий каталог из которого открыт исполняемый файл
+    var current_dir = window.location.pathname.slice(1).split('/').slice(0, -1).join('/');
+
+    // создать ul список
+    var table = content_panel.list || content_panel.add('list:ul');
+
+    // установить текущий каталог
+    process.chdir(current_dir);
+
+    // прочитать список файлов в подкаталогах и вывести в список
+    create('fs.walker raw', current_dir)
+        .listSync(function(path) {
+            // добавить элемент в список
+            table.add('li', path);
+        });
+    // создать DOM элемент в окне
+    table.createElement();
+
+});
+
+});}
+</script>
+</body>
+</html>

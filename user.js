@@ -17,7 +17,7 @@ $DOC.parseContent(function(){/*
 <h3>basic io components</h3>
 </div>
 
-<a href="http://node-components.github.io/com-fs" class="label label-default">GitHub repository</a>
+<a href="https://github.com/node-components/com-fs" class="label label-default">GitHub repository</a>
 &nbsp;<a href="http://aplib.github.io/processor.js" class="label label-default">processor.js</a>
 
 [![NPM version](https://badge.fury.io/js/com-fs.png)](http://badge.fury.io/js/com-fs)

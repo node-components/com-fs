@@ -1,7 +1,7 @@
-com-fs
+com-fs 
 ======
 
-### basic file system components for [processor.js](http://aplib.github.io/processor.js)
+### basic io components for using with [processor.js](http://aplib.github.io/processor.js) library
 
 [![NPM version](https://badge.fury.io/js/com-fs.png)](http://badge.fury.io/js/com-fs)
 
@@ -15,7 +15,7 @@ com-fs
 
 
     var processor = require('processor'),
-        create = processor.create.bind(processor);
+        create = processor.create;
     // using
         require('com-fs');
 

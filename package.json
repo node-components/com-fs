@@ -1,6 +1,6 @@
 {
   "name": "com-fs",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "author": {
     "name": "vadim baklanov",
     "email": "antheworld@gmail.com"
@@ -15,6 +15,6 @@
   "bugs": {
     "url": "http://github.com/node-components/com-fs/issues"
   },
-  "files": ["com-fs.js","LICENSE","README.md"],
+  "files": ["com-fs.js","LICENSE","README.md",docs.html],
   "license": "MIT"
 }

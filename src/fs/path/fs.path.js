@@ -79,6 +79,9 @@
             return (parent) ? (parent.getFullPath() + '/' + this.path) : this.path;
         };
 
+        /**
+         * @returns Returns the absolute path which can be a combination of several stacked objects fs.path representing path segments.
+         */
         this.getParentPath = function(algorithm) {
             // algorithm
             // 0 - parent from local path

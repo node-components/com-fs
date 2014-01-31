@@ -5,8 +5,6 @@ com-fs
 
 [![NPM version](https://badge.fury.io/js/com-fs.png)](http://badge.fury.io/js/com-fs)
 
-[GitHub repository](https://github.com/node-components/com-fs)
-
 ### Installing
 
     npm install com-fs
@@ -49,5 +47,5 @@ fs.path
 
 fs.replace
 
-[fs.waker](src/fs/walker/fs.walker.html)
+[fs.waker](http://node-components.github.io/com-fs/src/fs/walker/fs.walker.html)
 Iterate through a directory tree, enumerate directories and files

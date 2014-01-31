@@ -2,7 +2,7 @@ $DOC.parseContent(function(){/*
 
  <!--header-panel
  <div><a href="http://node-components.github.io/com-fs">[h1`btn-success border-radius:4px; padding:20px; display:inline-block;]com-fs[/h1]</a>
- <h3>base io components</h3>
+ <h3>basic io components</h3>
  </div>
 
  <a href="http://node-components.github.io/com-fs" class="label label-default">GitHub repository</a>

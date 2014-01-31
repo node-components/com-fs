@@ -15,6 +15,11 @@
   "bugs": {
     "url": "http://github.com/node-components/com-fs/issues"
   },
-  "files": ["com-fs.js","LICENSE","README.md",docs.html],
+  "files": [
+    "com-fs.js",
+    "LICENSE",
+    "README.md",
+    "index.html",
+    "src/fs/walker/fs.walker.html"],
   "license": "MIT"
 }

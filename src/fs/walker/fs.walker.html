@@ -16,20 +16,20 @@
 - flags=... - to set the flags argument
 
 
-    processor.create('fs.walker flags=fd', path)
+    create('fs.walker flags=fd', path)
 
 - [...] - flags alternative syntax
 - raw - return in result list items path as string otherwise returns fs.path objects.
 
 
-    processor.create('fs.walker [fd]', path)
+    create('fs.walker [fd]', path)
 
 #### Parameters in fixed order
 
 (filter,path,flags)
 
 
-    processor.create('fs.walker(/.*\.dat/,temp)')
+    create('fs.walker(/.*\.dat/,temp)')
 
 #### Arguments
 
@@ -40,19 +40,19 @@
  - f - enumerate files
 
 
-    processor.create('fs.walker', {filter: /.*\.dat/, path: ['temp', 'libs'], flags:'d'})
+    create('fs.walker', {filter: /.*\.dat/, path: ['temp', 'libs'], flags:'d'})
 
 #### Prime argument
 
 - path  
 
 
-    processor.create('fs.walker', 'temp')
+    create('fs.walker', 'temp')
 
 - [filter, path]
 
 
-    processor.create('fs.walker', [/.*\.dat/, 'temp'])
+    create('fs.walker', [/.*\.dat/, 'temp'])
 
 ### Connection
 

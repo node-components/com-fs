@@ -1,17 +1,28 @@
 $DOC.parseContent(function(){/*
 
- <!--header-panel
- <div><a href="http://node-components.github.io/com-fs">[h1`btn-success border-radius:4px; padding:20px; display:inline-block;]com-fs[/h1]</a>
- <h3>basic io components</h3>
- </div>
+<!--header-panel
+<style>
+.header-panel {
+    padding-bottom: 0;
+}
+.content-panel {
+    padding-top: 0;
+}
+ .right-side-panel {
+ padding-top: 0;
+ }
+</style>
 
- <a href="http://node-components.github.io/com-fs" class="label label-default">GitHub repository</a>
- &nbsp;<a href="http://aplib.github.io/processor.js" class="label label-default">processor.js</a>
+<div><a href="{{=$DOC.root}}index.html">[h1`btn-success border-radius:4px; padding:20px; display:inline-block;]com-fs[/h1]</a>
+<h3>basic io components</h3>
+</div>
 
- [![NPM version](https://badge.fury.io/js/com-fs.png)](http://badge.fury.io/js/com-fs)
- -->
+<a href="http://node-components.github.io/com-fs" class="label label-default">GitHub repository</a>
+&nbsp;<a href="http://aplib.github.io/processor.js" class="label label-default">processor.js</a>
 
- <!--right-side-panel
- -->
+[![NPM version](https://badge.fury.io/js/com-fs.png)](http://badge.fury.io/js/com-fs)
+-->
+
+
 
  */});

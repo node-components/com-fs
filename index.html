@@ -17,10 +17,9 @@
 
 
     var processor = require('processor'),
-        create = processor.create.bind(processor);
-    // using fs namespace components
+        create = processor.create;
+    // using
         require('com-fs');
-
 
     // recursively walk and build file list
     create('fs.walker raw', [/.*\.js/, '/src'])
@@ -29,18 +28,15 @@
         });
     });
 
+
 ### components
 
 * [fs.walker](src/fs/walker/fs.walker.html)
 
  Iterate through a directory tree, enumerate directories and files
 
-
 -->
 
-<!--right-side-panel
-
--->
 
 
 </body>

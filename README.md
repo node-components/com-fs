@@ -49,5 +49,5 @@ fs.path
 
 fs.replace
 
-[fs.waker](src\fs\walker\fs.walker.html)
+[fs.waker](src/fs/walker/fs.walker.html)
 Iterate through a directory tree, enumerate directories and files

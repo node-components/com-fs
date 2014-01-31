@@ -12,13 +12,12 @@
             if ('path' in prime && !('path' in args)) args.path = prime.path;
         }
 
+        // fixed parameter is a path of target file
         var fixed_params = parameters['{params}'];
-        if (fixed_params && fixed_params.length) {
-            if (!('src' in args)) args.src  = fixed_params[0];
-            if (fixed_params.length > 1 && !('path' in args)) args.path = fixed_params[1];
-        }
+        if (fixed_params && fixed_params.length)
+            if (!('path' in args)) args.path  = fixed_params[0];
 
-        this.initialize('fs.concat', parameters, args);
+        this.initialize('fs.fileconcat', parameters, args);
 
         this.startSync = function(err_callback) {
             try {

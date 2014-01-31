@@ -27,25 +27,4 @@ com-fs
 
 ### components
 
-fs.concat
-
-fs.copy
-
-fs.directory
-
-fs.file
-
-fs.fileconcat
-
-fs.filereader
-
-fs.filewriter
-
-fs.list
-
-fs.path
-
-fs.replace
-
-[fs.waker](http://node-components.github.io/com-fs/src/fs/walker/fs.walker.html)
-Iterate through a directory tree, enumerate directories and files
+[See documentation](http://node-components.github.io/com-fs/)

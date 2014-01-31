@@ -3,8 +3,8 @@
         var prime = this.removePrime(args);
         if (Array.isArray(prime)) {
             // prime is array of arguments
-            if (prime.length && !args.src) args.src = prime[0];
-            if (prime.length > 1 && !args.dst) args.dst = prime[1];
+            if (prime.length && !args.src)      args.src = prime[0];
+            if (prime.length > 1 && !args.dst)  args.dst = prime[1];
         } else if (prime) {
             // prime is hash
             if ('src' in prime && !args.src) args.src = prime.src;

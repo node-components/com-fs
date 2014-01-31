@@ -2,61 +2,54 @@
 <html lang="en-US">
 <head>
     <meta charset="utf-8">
-    <title>fs.fileconcat</title>
+    <title>fs.path</title>
     <script src="../../../document.min.js" userjs="user.js" icon="favicon.ico" id="DOC" onerror="var l=document.createElement('link'),s=document.createElement('script');l.rel='stylesheet';l.href='http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css';l.id='bootstrap.css';l.auto='1';document.head.insertBefore(l,document.getElementById('DOC'));s.src='http://aplib.github.io/document.min.js';document.head.appendChild(s);"></script>
 </head>
 <body>
 
 <!--content-panel
 
-## fs.fileconcat
-Write target file as a concatenation of files by list.
-
-
-#### Parameters in fixed order
-
-- path - path of target file.
-
-
-    create('fs.fileconcat(out.dat)')
+## fs.path
+An object that represents a file system path and provides properties and methods for path manipulations.
 
 #### Arguments
 
-- src - list of source files.
-- path - path of target file.
+- path - file system path.
 
 
-    create('fs.fileconcat', {src: ['file1.dat','file2.dat'], path: 'out.dat'})
+    create('fs.path', { path: 'temp/file.dat' })
 
 #### Prime argument
 
 - path  
 
 
-    create('fs.fileconcat', 'out.dat')
+    create('fs.path', 'temp/file.dat')
 
-- [[source files list], path]
-
-
-    create('fs.fileconcat', [['file1.dat','file2.dat'], 'out.dat'])
 
 ### Connection
 
 #### Parent/child
 
-fs.fileconcat is a fs.path descedant and supports file system path herarchy and fs.path methods
+If the object is not marked as an absolute path, it uses the parent nodes as the base path when combining full path in the method getFullPath().
 
-### Methods
 
-#### startSync()
+### Properties and methods
 
-Concatenate files.
+#### getFullPath()
 
+Returns the absolute path which can be a combination of several stacked objects fs.path representing path segments.
 
 
 -->
 
+
+
+
 <noscript><div class="alert alert-warning">This Website requires your browser to be JavaScript enabled.</div></noscript>
+
+
+
 
 </body>
 </html>

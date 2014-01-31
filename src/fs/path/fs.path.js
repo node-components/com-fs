@@ -68,6 +68,9 @@
             }
         });
 
+        /**
+         * @returns Returns the absolute path which can be a combination of several stacked objects fs.path representing path segments.
+         */
         this.getFullPath = function() {
             var parent = this.parent;
             // skipt non path objects in hierarchy

@@ -1,4 +1,4 @@
-//     processor.js basic fs namespace components
+//     com-fs basic io components for using with processor.js
 //     (c) 2013 vadim b. https://github.com/node-components/com-fs
 //     license: MIT
 

@@ -80,13 +80,13 @@
         };
 
         /**
-         * @returns Returns the absolute path which can be a combination of several stacked objects fs.path representing path segments.
+         * @returns Returns the parent path.
          */
-        this.getParentPath = function(algorithm) {
-            // algorithm
+        this.getParentPath = function(variant) {
+            // variant
             // 0 - parent from local path
             // 1 - parent from full path
-            var path = (algorithm) ? this.getFullPath() : this.path;
+            var path = (variant) ? this.getFullPath() : this.path;
             if (path) {
                 if (path.slice(-2) === '//')
                     throw new TypeError('fs.path.getParentPath() invalid parent path');
@@ -107,8 +107,20 @@
             return (this.parameters.raw) ? parent_path : processor.create('fs.path', parent_path);
         };
 
-        this.getStat = function() {
+        /**
+         * @returns Returns node.js <a href="http://nodejs.org/api/fs.html#fs_class_fs_stats">fs.Stats object</a> for the full path.
+         */
+        this.getStatSync = function() {
             return fs.statSync(this.getFullPath());
+        };
+
+        /**
+         * The callback gets two arguments (err, stats) where stats is a <a href="http://nodejs.org/api/fs.html#fs_class_fs_stats">fs.Stats object</a> for the full path.
+         * @returns Returns this.
+         */
+        this.getStat = function(callback) {
+            fs.stat(this.getFullPath(), callback);
+            return this;
         };
 
         this.ifExists = function(path, callback) {
@@ -249,11 +261,11 @@
         for(var i = 0, c = src.length; i < c; i++) {
             var src_item = src[i],
                 dst_item = (dst.length === 1) ? dst[0] : dst[i];
-            var src_stat = src_item.getStat();
+            var src_stat = src_item.getStatSync();
             if (src_stat.isDirectory())
                 throw new SyntaxError('Directory is invalid source');
             var src_path = src_item.getFullPath();
-            var dst_stat = dst_item.getStat(),
+            var dst_stat = dst_item.getStatSync(),
                 dst_path = (dst_stat.isDirectory()) ? dst_item.combine(src_item.fullName).getFullPath() : dst_item.getFullPath();
             callback(src_path, dst_path);
         }

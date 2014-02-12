@@ -8,6 +8,17 @@
         NodePrototype = processor.node_prototype,
         fs = require('fs');
 
+    function extend(object) {
+        for(var i = 1, c = arguments.length; i < c; i++) {
+            var src = arguments[i];
+            if (typeof src === 'object')
+                for(var prop in src)
+                    if (src.hasOwnProperty(prop))
+                        object[prop] = src[prop];
+        }
+        return object;
+    }
+
     function FSPath(parameters, args) {
         this.initialize('fs.path', parameters, args);
 
@@ -78,6 +89,10 @@
             }
         });
 
+        this.toString = function() {
+            return this.path;
+        };
+
         /**
          * @returns Returns the absolute path which can be a combination of several stacked objects fs.path representing path segments.
          */
@@ -87,6 +102,11 @@
             while(parent && parent._type !== 'fs.path' && !(parent instanceof FSObject))
                 parent = parent.parent;
             return (parent) ? (parent.getFullPath() + '/' + this.path) : this.path;
+        };
+
+        this.getRealPath = function() {
+            var full_path = this.getFullPath();
+            return fs.realpathSync(full_path);
         };
 
         /**
@@ -354,10 +374,41 @@
     FSObject.prototype = new FSPath({},{});
 
     function FSDirectory(parameters, args) {
+
         // prime is path
-        args.path = this.removePrime(args);
+        if ('' in args)
+            args.path = this.removePrime(args);
 
         this.initialize('fs.directory', parameters, args);
+
+        this.unsafeRemoveSync = function(_path) {
+
+            var path = (arguments.length) ? _path : this.getFullPath();
+
+            if (!path)
+                throw new TypeError('Invalid directory path!');
+
+            while (path.slice(-1) === '/')
+                path = path.slice(0, -1);
+
+            var dirs = [path],
+                rmdirs = [];
+
+            while(path = dirs.pop()) {
+                rmdirs.push(path);
+                fs.readdirSync(path).forEach(function(name) {
+                    var subpath = path + '/' + name;
+                    if (fs.statSync(subpath).isDirectory())
+                        dirs.push(subpath)
+                    else
+                        // delete file
+                        fs.unlinkSync(subpath);
+                });
+            }
+            while(path = rmdirs.pop())
+                // delete directory
+                fs.rmdirSync(path);
+        };
     }
     FSDirectory.prototype = new FSObject();
     processor.typeRegister('fs.directory', FSDirectory);
@@ -375,23 +426,33 @@
                 }
             });
 
+        /**
+         * Merge options from arguments, parameters, fixed parameters and default options object. Options object used as an argument to call fs* methods.
+         *
+         * @param {object} [options] Default options hash object.
+         * @param {boolean} write_mode Merge "mode" option for write operations.
+         * @returns {object} Returns options hash object.
+         */
         this.getOptions = function(options, write_mode) {
             if (!options) {
-                var options = {},
+                var options = extend({}, options),
+                    args = this.arguments,
                     parameters = this.parameters,
                     fixed_params = parameters['{params}'];
 
                 if ('encoding' in args)             options.encoding = args.encoding;
                 else if ('encoding' in parameters)  options.encoding = parameters.encoding;
-                else                                options.encoding = fixed_params[0];
+                else if (fixed_params)              options.encoding = fixed_params[0];
 
                 if ('flag' in args)                 options.flag = args.flag;
                 else if ('flag' in parameters)      options.flag = parameters.flag;
-                else                                options.flag = fixed_params[(fixed_params.length > 2) ? 2 : 1];
+                else if (fixed_params)              options.flag = fixed_params[(fixed_params.length > 2) ? 2 : 1];
 
-                if ('mode' in args)                 options.mode = parseInt(args.mode);
-                else if ('mode' in parameters)      options.mode = parseInt(parameters.mode);
-                else if (fixed_params.length > 2)   options.mode = parseInt(fixed_params[1]);
+                if (write_mode) {
+                    if ('mode' in args)                 options.mode = parseInt(args.mode);
+                    else if ('mode' in parameters)      options.mode = parseInt(parameters.mode);
+                    else if (fixed_params && fixed_params.length > 2)   options.mode = parseInt(fixed_params[1]);
+                }
             }
             return options;
         };
@@ -407,28 +468,79 @@
 
         this.initialize('fs.filereader', parameters, args);
 
-        this.read = function(callback) {
-            var fullpath = this.getFullPath(),
-                options = this.getOptions(options);
-            fs.readFile(fullpath, options, callback);
+        /**
+         * Asynchronously reads the entire contents of the file.
+         *
+         * @param {object} [options] Options http://nodejs.org/api/fs.html
+         * @param callback The callback is passed two arguments (err, data), where data is the contents of the file.
+         * @returns {object} Returns this.
+         */
+        this.read = function(options, callback) {
+            var fullpath = this.getFullPath();
+            this.readFrom(fullpath, options, callback);
             return this;
         };
 
-        this.readSync = function() {
-            var fullpath = this.getFullPath(),
-                options = this.getOptions(options);
-            return fs.readFileSync(fullpath, options);
+        /**
+         * Asynchronously reads the entire contents of specified file.
+         *
+         * @param {string|fs.path} file_path File path.
+         * @param {object} [options] Options http://nodejs.org/api/fs.html
+         * @param callback The callback is passed two arguments (err, data), where data is the contents of the file.
+         * @returns {object} Returns this.
+         */
+        this.readFrom = function(file_path, options, callback) {
+
+            var fullpath = (typeof file_path === 'object') ? file_path.getFullPath() : file_path;
+
+            if (typeof options === 'function')
+                fs.readFile(fullpath, this.getOptions(), options);
+            else
+                fs.readFile(fullpath, options || this.getOptions(), callback);
+
+            return this;
+        };
+
+        /**
+         * Synchronously reads the entire contents of the file.
+         *
+         * @param {object} [options] Options http://nodejs.org/api/fs.html
+         * @param {function} [callback] The callback is passed (data), where data is the contents of the file.
+         * @returns {object} Returns this if specified callback and content of the file otherwise.
+         */
+        this.readSync = function(options, callback) {
+            var fullpath = this.getFullPath();
+            return this.readFromSync(fullpath, options, callback);
+        };
+
+        /**
+         * Synchronously reads the entire contents of specified file.
+         *
+         * @param {string|fs.path} file_path File path.
+         * @param {object} [options] Options http://nodejs.org/api/fs.html
+         * @param {function} [callback] The callback is passed (data), where data is the contents of the file.
+         * @returns {object} Returns this if specified callback and content of the file otherwise.
+         */
+        this.readFromSync = function(file_path, options, callback) {
+
+            var fullpath = (typeof file_path === 'object') ? file_path.getFullPath() : file_path;
+
+            if (typeof options === 'function') {
+                var data = fs.readFileSync(fullpath, this.getOptions());
+                options(data, this);
+                return this;
+            } else if (typeof callback === 'function') {
+                var data = fs.readFileSync(fullpath, options || this.getOptions());
+                options(data, this);
+                return this;
+            } else {
+                return fs.readFileSync(fullpath, options || this.getOptions());
+            }
         };
 
         this.readBufferSync = function(file_path) {
             this.buffer = this.readSync.apply(this, arguments);
             return this;
-        };
-
-        this.readFromSync = function(file_path) {
-            var fullpath = arguments.length ? file_path : this.getFullPath(),
-                options = this.getOptions(options);
-            return fs.readFileSync(fullpath, options);
         };
     }
     FileReader.prototype = new File({},{});

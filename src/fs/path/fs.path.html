@@ -12,12 +12,14 @@
 ## fs.path
 An object that represents a file system path and provides properties and methods for path manipulations.
 
+
 #### Arguments
 
 - path - file system path.
 
 
     create('fs.path', { path: 'temp/file.dat' })
+
 
 #### Prime argument
 
@@ -29,15 +31,18 @@ An object that represents a file system path and provides properties and methods
 
 ### Connection
 
+
 #### Parent/child
 
 If the object is not marked as an absolute path, it uses the parent nodes as the base path when combining full path in the method getFullPath().
 
 
 ### Properties and methods
+---
 
 #### getFullPath()
 Returns the absolute path which can be a combination of several stacked objects fs.path representing path segments.
+
 
 #### getParentPath()
 Returns the parent path.
@@ -52,19 +57,6 @@ The callback gets two arguments (err, stats) where stats is a <a href="http://no
 
 -->
 
-
-
-
-
-
-
 <noscript><div class="alert alert-warning">This Website requires your browser to be JavaScript enabled.</div></noscript>
-
-
-
-
-
-
-
 </body>
 </html>

@@ -68,6 +68,10 @@
             }
         });
 
+        this.toString = function() {
+            return this.path;
+        };
+
         /**
          * @returns Returns the absolute path which can be a combination of several stacked objects fs.path representing path segments.
          */
@@ -77,6 +81,11 @@
             while(parent && parent._type !== 'fs.path' && !(parent instanceof FSObject))
                 parent = parent.parent;
             return (parent) ? (parent.getFullPath() + '/' + this.path) : this.path;
+        };
+
+        this.getRealPath = function() {
+            var full_path = this.getFullPath();
+            return fs.realpathSync(full_path);
         };
 
         /**

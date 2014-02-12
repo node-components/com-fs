@@ -8,6 +8,17 @@
         NodePrototype = processor.node_prototype,
         fs = require('fs');
 
+    function extend(object) {
+        for(var i = 1, c = arguments.length; i < c; i++) {
+            var src = arguments[i];
+            if (typeof src === 'object')
+                for(var prop in src)
+                    if (src.hasOwnProperty(prop))
+                        object[prop] = src[prop];
+        }
+        return object;
+    }
+
 /*#include fs/path/fs.path.js*/
 
 /*#include fs/fsobject/fs.fsobject.js*/

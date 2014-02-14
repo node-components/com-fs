@@ -17,12 +17,12 @@
 
 
     var processor = require('processor'),
-        create = processor.create;
+        com = processor.create;
     // using
         require('com-fs');
 
     // recursively walk and build file list
-    create('fs.walker raw', [/.*\.js/, '/src'])
+    com('fs.walker raw', [/.*\.js/, '/src'])
         .listSync(function(path) {
             ...
         });

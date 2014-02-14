@@ -1,6 +1,6 @@
 {
   "name": "com-fs",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "author": {
     "name": "vadim baklanov",
     "email": "antheworld@gmail.com"
@@ -20,6 +20,9 @@
     "LICENSE",
     "README.md",
     "index.html",
-    "src/fs/walker/fs.walker.html"],
+      "src/fs/fileconcat/fs.fileconcat.html",
+      "src/fs/filereader/fs.filereader.html",
+      "src/fs/path/fs.path.html",
+      "src/fs/walker/fs.walker.html"],
   "license": "MIT"
 }

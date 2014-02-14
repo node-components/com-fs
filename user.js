@@ -5,11 +5,18 @@ $DOC.parseContent(function(){/*
 .header-panel {
     padding-bottom: 0;
 }
+
 .content-panel {
     padding-top: 0;
 }
- .right-side-panel {
- padding-top: 0;
+
+.right-side-panel {
+    padding-top: 0;
+}
+
+ div h3 span p a:link,
+ div h3 span p a:visited {
+    color:#e0e0e0;
  }
 </style>
 

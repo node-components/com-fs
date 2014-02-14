@@ -42,7 +42,7 @@
          * Synchronously reads the entire contents of the file.
          *
          * @param {object} [options] Options http://nodejs.org/api/fs.html
-         * @param {function} [callback] The callback is passed (data), where data is the contents of the file.
+         * @param {function} [callback] The callback is passed the contents of the file.
          * @returns {object} Returns this if specified callback and content of the file otherwise.
          */
         this.readSync = function(options, callback) {
@@ -55,7 +55,7 @@
          *
          * @param {string|fs.path} file_path File path.
          * @param {object} [options] Options http://nodejs.org/api/fs.html
-         * @param {function} [callback] The callback is passed (data), where data is the contents of the file.
+         * @param {function} [callback] The callback is passed the contents of the file.
          * @returns {object} Returns this if specified callback and content of the file otherwise.
          */
         this.readFromSync = function(file_path, options, callback) {

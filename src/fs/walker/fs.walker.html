@@ -61,14 +61,15 @@ Iterate through a directory tree, enumerate directories and files.
 
 fs.walker is a fs.path descedant and supports file system path herarchy and fs.path methods
 
-### Methods
+### Properties and methods
+---
 
-#### listSync()
+### listSync()
 
 Returns a list of paths that match to the filter criteria.
 The type of elements in the list 'string' if 'raw' parameter is true otherwise returns fs.path objects.
 
-#### listSync(callback)
+### listSync(callback)
 
 The callback invoked on iterate each item.
 Returns a list of paths that match to the filter criteria and callback returns a true.
